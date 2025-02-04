@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Data.Repositories;
 
-public abstract class BaseRepository<T>(DataContext context) : IBaseRepository<T> where T : class
+public abstract class BaseRepository<T>(DataContext context) : IBaseRepository<T> where T: class
 {
     
     private readonly DbSet<T> _dbSet = context.Set<T>();
@@ -24,7 +24,7 @@ public abstract class BaseRepository<T>(DataContext context) : IBaseRepository<T
         throw new NotImplementedException();
     }
 
-    public async Task<T> Update(T entity)
+    public virtual async Task<T> Update(T entity)
     {
         throw new NotImplementedException();
     }

@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBProject_EC", "DBProject_EC\DBProject_EC.csproj", "{2A80B732-521B-44F7-8C63-E1970AD0351C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API", "API\API.csproj", "{2A80B732-521B-44F7-8C63-E1970AD0351C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data", "Data\Data.csproj", "{324C29AE-8FD7-4830-AC68-22C1255355C4}"
 EndProject
