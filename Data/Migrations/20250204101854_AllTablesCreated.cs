@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Data.Migrations
 {
     /// <inheritdoc />
-    public partial class TestDb : Migration
+    public partial class AllTablesCreated : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -74,6 +74,29 @@ namespace Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "CustomerServices",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CustomerServices", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_CustomerServices_Customer_Id",
+                        column: x => x.Id,
+                        principalTable: "Customer",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CustomerServices_Services_Id",
+                        column: x => x.Id,
+                        principalTable: "Services",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ProjectCustomer",
                 columns: table => new
                 {
@@ -106,12 +129,6 @@ namespace Data.Migrations
                 {
                     table.PrimaryKey("PK_ProjectServices", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ProjectServices_Customer_Id",
-                        column: x => x.Id,
-                        principalTable: "Customer",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
                         name: "FK_ProjectServices_Projects_Id",
                         column: x => x.Id,
                         principalTable: "Projects",
@@ -134,6 +151,9 @@ namespace Data.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "CustomerServices");
+
             migrationBuilder.DropTable(
                 name: "ProjectCustomer");
 

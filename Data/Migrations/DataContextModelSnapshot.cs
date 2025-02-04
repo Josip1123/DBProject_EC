@@ -17,6 +17,16 @@ namespace Data.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.1");
 
+            modelBuilder.Entity("CustomerServices", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CustomerServices");
+                });
+
             modelBuilder.Entity("Data.Entities.CustomersEntity", b =>
                 {
                     b.Property<string>("Id")
@@ -122,6 +132,21 @@ namespace Data.Migrations
                     b.ToTable("ProjectServices");
                 });
 
+            modelBuilder.Entity("CustomerServices", b =>
+                {
+                    b.HasOne("Data.Entities.CustomersEntity", null)
+                        .WithMany()
+                        .HasForeignKey("Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Data.Entities.ServicesEntity", null)
+                        .WithMany()
+                        .HasForeignKey("Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Data.Entities.ProjectEntity", b =>
                 {
                     b.HasOne("Data.Entities.ProjectOwnerEntity", "Owner")
@@ -150,12 +175,6 @@ namespace Data.Migrations
 
             modelBuilder.Entity("ProjectServices", b =>
                 {
-                    b.HasOne("Data.Entities.CustomersEntity", null)
-                        .WithMany()
-                        .HasForeignKey("Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Data.Entities.ProjectEntity", null)
                         .WithMany()
                         .HasForeignKey("Id")

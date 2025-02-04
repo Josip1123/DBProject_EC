@@ -81,7 +81,7 @@ public class DataContext(DbContextOptions<DataContext> options) : DbContext(opti
             .HasMany(u => u.Customers)
             .WithMany(p => p.Services)
             .UsingEntity<Dictionary<string, object>>(
-                "ProjectServices",  
+                "CustomerServices",  
                 j => j
                     .HasOne<CustomersEntity>()
                     .WithMany()
