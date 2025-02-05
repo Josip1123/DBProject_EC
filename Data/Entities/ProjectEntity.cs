@@ -1,6 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
+
 namespace Data.Entities;
 
 public class ProjectEntity
@@ -10,14 +11,14 @@ public class ProjectEntity
     [Column(TypeName="nvarchar(50)")]
     public string Name { get; set; } = null!;
 
-    public DateTime DateCreated { get; set; } = DateTime.UtcNow;
+    public DateTime DateCreated { get; set; }
 
     public DateTime DateDue { get; set; }
     
     public bool IsCompleted { get; set; }
     
     
-    public string OwnerId { get; set; }
+    public string OwnerName { get; set; }
     
     public ProjectOwnerEntity Owner { get; set; } = null!;
     

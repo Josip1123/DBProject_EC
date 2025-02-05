@@ -11,7 +11,7 @@ public class ServicesEntity
         public string Name { get; set; } = null!;
         
         [Column(TypeName="nvarchar(150)")]
-        public string? Description { get; set; }
+        public string Description { get; set; } = null!;
         
         public decimal Price { get; set; }
 

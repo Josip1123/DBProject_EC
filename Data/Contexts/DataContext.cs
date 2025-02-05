@@ -40,7 +40,7 @@ public class DataContext(DbContextOptions<DataContext> options) : DbContext(opti
         modelBuilder.Entity<ProjectOwnerEntity>()
             .HasMany(po => po.Projects)
             .WithOne(p => p.Owner)
-            .HasForeignKey(p => p.OwnerId)
+            .HasForeignKey(p => p.OwnerName)
             .OnDelete(DeleteBehavior.Cascade);
         
         modelBuilder.Entity<ProjectEntity>()
