@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Data.Entities;
 
+[Table("Projects")]
 public class ProjectEntity
 {
     [Key] [Required] public string Id { get; set; } = null!;
@@ -11,18 +12,19 @@ public class ProjectEntity
     [Column(TypeName="nvarchar(50)")]
     public string Name { get; set; } = null!;
 
-    public DateTime DateCreated { get; set; }
+    public string DateCreated { get; set; }
 
-    public DateTime DateDue { get; set; }
+    public string DateDue { get; set; }
     
     public bool IsCompleted { get; set; }
-    
-    
-    public string OwnerName { get; set; }
-    
-    public ProjectOwnerEntity Owner { get; set; } = null!;
+
+
+    public ICollection<ProjectOwnerEntity> Owners = [];
     
     public ICollection<CustomersEntity> Customers = [];
-
+    
     public ICollection<ServicesEntity> Services = [];
+    
+
+    
 }

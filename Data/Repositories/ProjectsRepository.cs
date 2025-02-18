@@ -7,4 +7,5 @@ namespace Data.Repositories;
 
 public class ProjectsRepository(DataContext context) : BaseRepository<ProjectEntity>(context)
 {
+   
 }

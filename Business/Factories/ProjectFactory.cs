@@ -1,4 +1,5 @@
 using Business.Dtos;
+using Business.Helpers;
 using Data.Entities;
 
 namespace Business.Factories;
@@ -9,11 +10,11 @@ public static class ProjectFactory
     {
         return new ProjectEntity()
         {
-            Id = dto.Id,
+            Id = $"P - {NanoIdGenerator.GenerateId(5)}",
             Name = dto.Name,
             DateCreated = dto.DateCreated,
             DateDue = dto.DateDue,
-            IsCompleted = dto.IsCompleted
+            IsCompleted = dto.IsCompleted,
         };
     }
     
@@ -21,17 +22,20 @@ public static class ProjectFactory
     {
         return new ProjectOwnerEntity()
         {
+            Id = $"PO - {NanoIdGenerator.GenerateId(5)}",
             Name = dto.Name,
-            Email = dto.Email
+            Email = dto.Email,
+            ProjectId = dto.ProjectId
         };
     }
     public static CustomersEntity Create(CustomerDto dto)
     {
         return new CustomersEntity()
         {
-            Id = dto.Id,
+            Id = $"C - {NanoIdGenerator.GenerateId(5)}",
             Name = dto.Name,
-            Email = dto.Email
+            Email = dto.Email,
+            ProjectId = dto.ProjectId
         };
     }
     
@@ -39,10 +43,11 @@ public static class ProjectFactory
     {
         return new ServicesEntity()
         {
-            Id = dto.Id,
+            Id = $"S - {NanoIdGenerator.GenerateId(5)}",
             Name = dto.Name,
             Description = dto.Description,
-            Price = dto.Price
+            Price = dto.Price,
+            ProjectId = dto.ProjectId
         };
     }
 }

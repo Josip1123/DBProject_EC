@@ -1,6 +1,0 @@
-@DBProject_EC_HostAddress = http://localhost:5251
-
-GET {{DBProject_EC_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###

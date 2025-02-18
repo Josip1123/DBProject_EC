@@ -14,8 +14,11 @@ public class CustomersEntity
     
     [Column(TypeName="nvarchar(150)")]
     public string Email { get; set; } = null!;
-
-    public ICollection<ProjectEntity> Projects = [];
-
-    public ICollection<ServicesEntity> Services = [];
+    
+    
+    
+    public required string ProjectId { get; set; }
+    
+    public ProjectEntity Project { get; set; } = null!;
+    
 }

@@ -11,4 +11,8 @@ public class ServiceDto
     public string Description { get; set; } = null!;
     
     public decimal Price { get; set; }
+    
+    public string ProjectId { get; set; }
+    
+    
 }

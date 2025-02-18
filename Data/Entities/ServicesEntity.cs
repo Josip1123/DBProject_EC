@@ -14,8 +14,9 @@ public class ServicesEntity
         public string Description { get; set; } = null!;
         
         public decimal Price { get; set; }
-
-        public ICollection<CustomersEntity> Customers = [];
-
-        public ICollection<ProjectEntity> Projects = [];
+        
+        
+        public required string ProjectId { get; set; }
+    
+        public ProjectEntity Project { get; set; } = null!;
 }

@@ -9,6 +9,6 @@ public class DataContextFactory : IDesignTimeDbContextFactory<DataContext>
         var optionsBuilder = new DbContextOptionsBuilder<DataContext>();
         optionsBuilder.UseSqlite("Data Source=MyDatabase.db");
 
-        return new DataContext(optionsBuilder.Options);
+        return new DataContext();
     }
 }

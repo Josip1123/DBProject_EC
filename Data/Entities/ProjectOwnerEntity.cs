@@ -6,15 +6,19 @@ namespace Data.Entities;
 public class ProjectOwnerEntity
 {
     [Key]
-    [Required]
     [Column(TypeName="nvarchar(50)")]
-    public string Name { get; set; } = null!;
+    public required string Id { get; set; }
+    
+    [Column(TypeName="nvarchar(50)")] 
+    public required string Name { get; set; } = null!;
     
     [Column(TypeName="nvarchar(150)")]
     public string Email { get; set; } = null!;
 
 
-    public ICollection<ProjectEntity> Projects = [];
+    public required string ProjectId { get; set; }
+    
+    public ProjectEntity Project { get; set; } = null!;
 
 
 }

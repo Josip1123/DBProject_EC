@@ -4,13 +4,13 @@ namespace Business.Dtos;
 
 public class ProjectDto
 {
-    public string Id = $"P - {NanoIdGenerator.GenerateId(5)}";
-
+    
     public string Name { get; set; } = null!;
     
-    public DateTime DateCreated { get; set; } = DateTime.UtcNow;
+    public string DateCreated { get; set; } = DateTime.Now.ToString("d");
     
-    public DateTime DateDue { get; set; }
+    public string DateDue { get; set; }
 
     public bool IsCompleted { get; set; } = false;
+    
 }

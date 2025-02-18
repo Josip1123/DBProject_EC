@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Data.Contexts;
 
-public class DataContext(DbContextOptions<DataContext> options) : DbContext(options)
+public class DataContext : DbContext
 {
 
     public DbSet<CustomersEntity> Customer { get; set; }
@@ -18,13 +18,14 @@ public class DataContext(DbContextOptions<DataContext> options) : DbContext(opti
     {
         if (!optionsBuilder.IsConfigured) 
         {
-            optionsBuilder.UseSqlite("Data Source=MyDatabase.db");
+            optionsBuilder.UseSqlite("Data Source=/Users/josipsmac/Desktop/EC utbildning/Csharp/DBProject_EC/Data/MyDatabase.db");
         }
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
+        
         modelBuilder.Entity<ServicesEntity>()
             .Property(p => p.Price)
             .HasColumnType("REAL");
@@ -37,62 +38,25 @@ public class DataContext(DbContextOptions<DataContext> options) : DbContext(opti
             .Property(o => o.DateDue)
             .HasColumnType("TEXT");
         
-        modelBuilder.Entity<ProjectOwnerEntity>()
-            .HasMany(po => po.Projects)
-            .WithOne(p => p.Owner)
-            .HasForeignKey(p => p.OwnerName)
+       modelBuilder.Entity<ProjectEntity>()
+            .HasMany(p => p.Owners)
+            .WithOne(p => p.Project)
+            .HasForeignKey(p => p.ProjectId)
             .OnDelete(DeleteBehavior.Cascade);
+       
+       modelBuilder.Entity<ProjectEntity>()
+           .HasMany(p => p.Customers)
+           .WithOne(p => p.Project)
+           .HasForeignKey(p => p.ProjectId)
+           .OnDelete(DeleteBehavior.Cascade);
+       
+       modelBuilder.Entity<ProjectEntity>()
+           .HasMany(p => p.Services)
+           .WithOne(p => p.Project)
+           .HasForeignKey(p => p.ProjectId)
+           .OnDelete(DeleteBehavior.Cascade);
         
-        modelBuilder.Entity<ProjectEntity>()
-            .HasMany(u => u.Customers)
-            .WithMany(p => p.Projects)
-            .UsingEntity<Dictionary<string, object>>(
-                "ProjectCustomer",  
-                j => j
-                    .HasOne<CustomersEntity>()
-                    .WithMany()
-                    .HasForeignKey("Id")
-                    .OnDelete(DeleteBehavior.Cascade),
-                j => j
-                    .HasOne<ProjectEntity>()
-                    .WithMany()
-                    .HasForeignKey("Id")
-                    .OnDelete(DeleteBehavior.Cascade)
-            );
-        
-        modelBuilder.Entity<ProjectEntity>()
-            .HasMany(u => u.Services)
-            .WithMany(p => p.Projects)
-            .UsingEntity<Dictionary<string, object>>(
-                "ProjectServices",  
-                j => j
-                    .HasOne<ServicesEntity>()
-                    .WithMany()
-                    .HasForeignKey("Id")
-                    .OnDelete(DeleteBehavior.Cascade),
-                j => j
-                    .HasOne<ProjectEntity>()
-                    .WithMany()
-                    .HasForeignKey("Id")
-                    .OnDelete(DeleteBehavior.Cascade)
-            );
-        
-        modelBuilder.Entity<ServicesEntity>()
-            .HasMany(u => u.Customers)
-            .WithMany(p => p.Services)
-            .UsingEntity<Dictionary<string, object>>(
-                "CustomerServices",  
-                j => j
-                    .HasOne<CustomersEntity>()
-                    .WithMany()
-                    .HasForeignKey("Id")
-                    .OnDelete(DeleteBehavior.Cascade),
-                j => j
-                    .HasOne<ServicesEntity>()
-                    .WithMany()
-                    .HasForeignKey("Id")
-                    .OnDelete(DeleteBehavior.Cascade)
-            );
+       
     }
 
 }
