@@ -1,4 +1,6 @@
 using System.Diagnostics;
+using Business.Dtos;
+using Business.Factories;
 using Data.Entities;
 using Data.Repositories;
 
@@ -78,12 +80,19 @@ public class ProjectService(ProjectsRepository projectsRepository) : IServices
         
     }
 
-    public async Task UpdateAsync(string id)
+    public async Task UpdateAsync(ProjectDto project, string id)
     {
         try
         {
-            var entityToUpdate = await GetByIdAsync(id);
-            await projectsRepository.UpdateAsync(entityToUpdate);
+                var entityToUpdate = await GetByIdAsync(id);
+                if (entityToUpdate == null)
+                {
+                    throw new Exception("Project not found");
+                }
+                entityToUpdate.Name = project.Name;
+                entityToUpdate.DateDue = project.DateDue;
+                entityToUpdate.IsCompleted = project.IsCompleted;
+                await projectsRepository.UpdateAsync(entityToUpdate);
         }
         catch (Exception e)
         {

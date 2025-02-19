@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="d6ab0fff-0145-4ec1-9766-eada71a41372" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../ProjectManagmentAPI/Controllers/ProjectControllers.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Business/Dtos/ProjectDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Business/Dtos/ProjectDto.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Business/Factories/ProjectFactory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Business/Factories/ProjectFactory.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ConsoleApp/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../ConsoleApp/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DBProject_EC.sln" beforeDir="false" afterPath="$PROJECT_DIR$/../DBProject_EC.sln" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Contexts/DataContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Contexts/DataContext.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Contexts/DataContextFactory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Contexts/DataContextFactory.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Data.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Entities/ProjectEntity.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Entities/ProjectEntity.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Migrations/20250211163212_AllTablesCreated.Designer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Migrations/20250211163212_AllTablesCreated.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Migrations/DataContextModelSnapshot.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyDatabase.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyDatabase.db-shm" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyDatabase.db-wal" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "Josip1123"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/Josip1123/DBProject_EC.git",
+    "accountId": "0fbd14f5-ba6d-4053-b2f7-cbefaf88f9a0"
+  }
+}]]></component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 7
+}]]></component>
+  <component name="ProjectId" id="2tFqdZVQn9NTnAfXGiIk2az7gUB" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d6ab0fff-0145-4ec1-9766-eada71a41372" name="Changes" comment="" />
+      <created>1739958257530</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1739958257530</updated>
+      <workItem from="1739958258694" duration="4000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
+  <component name="VcsManagerConfiguration">
+    <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+</project>

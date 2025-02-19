@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Data.Contexts;
 
-public class DataContext : DbContext
+public class DataContext(DbContextOptions<DataContext> options) : DbContext(options)
 {
 
     public DbSet<CustomersEntity> Customer { get; set; }
@@ -14,13 +14,6 @@ public class DataContext : DbContext
     
     public DbSet<ServicesEntity> Services { get; set; }
     
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        if (!optionsBuilder.IsConfigured) 
-        {
-            optionsBuilder.UseSqlite("Data Source=/Users/josipsmac/Desktop/EC utbildning/Csharp/DBProject_EC/Data/MyDatabase.db");
-        }
-    }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

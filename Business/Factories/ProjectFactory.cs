@@ -12,7 +12,6 @@ public static class ProjectFactory
         {
             Id = $"P - {NanoIdGenerator.GenerateId(5)}",
             Name = dto.Name,
-            DateCreated = dto.DateCreated,
             DateDue = dto.DateDue,
             IsCompleted = dto.IsCompleted,
         };
@@ -50,4 +49,5 @@ public static class ProjectFactory
             ProjectId = dto.ProjectId
         };
     }
+    
 }

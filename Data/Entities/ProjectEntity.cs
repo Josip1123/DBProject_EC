@@ -12,7 +12,7 @@ public class ProjectEntity
     [Column(TypeName="nvarchar(50)")]
     public string Name { get; set; } = null!;
 
-    public string DateCreated { get; set; }
+    public string DateCreated { get; set; } = DateTime.Now.ToString("d");
 
     public string DateDue { get; set; }
     
