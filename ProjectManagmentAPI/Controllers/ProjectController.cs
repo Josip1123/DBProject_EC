@@ -8,28 +8,29 @@ namespace ProjectManagmentAPI.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class ProjectControllers(ProjectService services) : ControllerBase
+public class ProjectController(ProjectService services) : ControllerBase
 {
     [HttpPost]
     public async Task<IActionResult> CreateProjectAsync([FromBody] ProjectDto dto)
     {
         var newProject = ProjectFactory.Create(dto);
         await services.CreateProjectAsync(newProject);
-        return Ok("Project saved successfully");
+        return Ok(new { message = "Project saved successfully" });
     }
     
     [HttpDelete]
-    public async Task<IActionResult> DeleteProjectAsync([FromBody] string id)
+    [Route("{id}")]
+    public async Task<IActionResult> DeleteProjectAsync([FromRoute] string id)
     {
         await services.DeleteAsync(id);
-        return Ok("Project deleted successfully");
+        return Ok(new { message = "Project deleted successfully" });
     }
     
     [HttpPut]
     public async Task<IActionResult> UpdateProjectAsync([FromBody] ProjectDto project, string id)
     {
         await services.UpdateAsync(project, id);
-        return Ok("Project updated successfully");
+        return Ok(new { message = "Project updated successfully" });
     }
 
     [HttpGet]
