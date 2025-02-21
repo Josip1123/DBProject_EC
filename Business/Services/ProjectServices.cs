@@ -7,7 +7,7 @@ using Data.Repositories;
 namespace Business.Services;
 
 
-public class ProjectService(ProjectsRepository projectsRepository) : IServices
+public class ProjectServices(ProjectsRepository projectsRepository) : IProjectServices
 {
     public async Task CreateProjectAsync(ProjectEntity project)
     {
@@ -42,6 +42,10 @@ public class ProjectService(ProjectsRepository projectsRepository) : IServices
         try
         {
             var project = await projectsRepository.GetAsync(x => x.Id == id);
+            if (project == null)
+            {
+                throw new Exception("Project not found");
+            }
             return project;
         }
         catch (Exception e)
@@ -51,25 +55,17 @@ public class ProjectService(ProjectsRepository projectsRepository) : IServices
         }
     }
     
-    public async Task<ProjectEntity> GetByNameAsync(string name)
-    {
-        try
-        {
-            var project = await projectsRepository.GetAsync(x => x.Name == name);
-            return project;
-        }
-        catch (Exception e)
-        {
-            Debug.WriteLine(e);
-            throw;
-        }
-    }
+  
 
     public async Task DeleteAsync(string id)
     {
         try
         {
             var entityToDelete = await GetByIdAsync(id);
+            if (entityToDelete == null)
+            {
+                throw new Exception("Project not found");
+            }
             await projectsRepository.DeleteAsync(entityToDelete);
         }
         catch (Exception e)

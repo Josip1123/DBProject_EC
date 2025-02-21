@@ -8,13 +8,13 @@ namespace ProjectManagmentAPI.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class ProjectController(ProjectService services) : ControllerBase
+public class ProjectController(ProjectServices projectServiceses) : ControllerBase
 {
     [HttpPost]
     public async Task<IActionResult> CreateProjectAsync([FromBody] ProjectDto dto)
     {
         var newProject = ProjectFactory.Create(dto);
-        await services.CreateProjectAsync(newProject);
+        await projectServiceses.CreateProjectAsync(newProject);
         return Ok(new { message = "Project saved successfully" });
     }
     
@@ -22,14 +22,14 @@ public class ProjectController(ProjectService services) : ControllerBase
     [Route("{id}")]
     public async Task<IActionResult> DeleteProjectAsync([FromRoute] string id)
     {
-        await services.DeleteAsync(id);
+        await projectServiceses.DeleteAsync(id);
         return Ok(new { message = "Project deleted successfully" });
     }
     
-    [HttpPut]
+    [HttpPut("{id}")]
     public async Task<IActionResult> UpdateProjectAsync([FromBody] ProjectDto project, string id)
     {
-        await services.UpdateAsync(project, id);
+        await projectServiceses.UpdateAsync(project, id);
         return Ok(new { message = "Project updated successfully" });
     }
 
@@ -37,9 +37,19 @@ public class ProjectController(ProjectService services) : ControllerBase
     public async Task<IActionResult> GetAllAsync()
     {
         
-        var projects = await services.GetAllAsync();
+        var projects = await projectServiceses.GetAllAsync();
 
         return Ok(projects);
+    }
+    
+    [HttpGet]
+    [Route("{id}")]
+    public async Task<IActionResult> GetAsync([FromRoute] string id)
+    {
+        
+        var project = await projectServiceses.GetByIdAsync(id);
+
+        return Ok(project);
     }
     
 }

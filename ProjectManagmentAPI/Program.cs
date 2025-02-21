@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using Business.Services;
 using Data.Contexts;
 using Data.Repositories;
@@ -9,7 +10,13 @@ builder.Services.AddControllers();
 builder.Services.AddDbContext<DataContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddScoped<ProjectsRepository>();
-builder.Services.AddScoped<ProjectService>();
+builder.Services.AddScoped<ProjectServices>();
+builder.Services.AddScoped<CustomersRepository>();
+builder.Services.AddScoped<CustomerServices>();
+builder.Services.AddScoped<ProjectOwnerRepository>();
+builder.Services.AddScoped<ProjectOwnerServices>();
+builder.Services.AddScoped<ServicesRepository>();
+builder.Services.AddScoped<ServiceServices>();
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
@@ -33,6 +40,11 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
     app.UseSwagger();
     app.UseSwaggerUI();
+    app.UseDeveloperExceptionPage();
+}
+else
+{
+    app.UseExceptionHandler("/err");
 }
 
 app.UseCors();

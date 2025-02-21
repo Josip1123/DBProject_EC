@@ -1,9 +1,18 @@
 using Data.Contexts;
 using Data.Entities;
+using Microsoft.EntityFrameworkCore;
 
 
 namespace Data.Repositories;
 
 public class CustomersRepository(DataContext context) : BaseRepository<CustomersEntity>(context)
 {
+    public override async Task<List<CustomersEntity>> GetAllAsync()
+    {
+        var ownersWithProject = await context.Customer
+            .Include(p => p.Project)
+            .ToListAsync();
+        
+        return ownersWithProject;
+    }
 }

@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace Data.Entities;
 
@@ -18,7 +19,12 @@ public class ProjectOwnerEntity
 
     public required string ProjectId { get; set; }
     
+    [JsonIgnore]
     public ProjectEntity Project { get; set; } = null!;
+    
+    [NotMapped]
+    [JsonPropertyName("projectName")]
+    public string? ProjectName => Project.Name;
 
 
 }

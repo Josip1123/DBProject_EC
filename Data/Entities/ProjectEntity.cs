@@ -17,13 +17,6 @@ public class ProjectEntity
     public string DateDue { get; set; }
     
     public bool IsCompleted { get; set; }
-
-
-    public ICollection<ProjectOwnerEntity> Owners = [];
-    
-    public ICollection<CustomersEntity> Customers = [];
-    
-    public ICollection<ServicesEntity> Services = [];
     
     [NotMapped] 
     public string Status
@@ -43,5 +36,11 @@ public class ProjectEntity
             return DateTime.Now > dateDue ? "Past Due" : "Ongoing";
         }
     }
+
+    public ICollection<ProjectOwnerEntity> Owners { get; set; } = [];
     
+    public ICollection<CustomersEntity> Customers { get; set; } = [];
+
+    public ICollection<ServicesEntity> Services { get; set; } = [];
+
 }
