@@ -23,6 +23,6 @@ public class CustomersEntity
     
     [NotMapped]
     [JsonPropertyName("projectName")]
-    public string? ProjectName => Project.Name;
+    public string? ProjectName => Project?.Name ?? "Unknown";
     
 }

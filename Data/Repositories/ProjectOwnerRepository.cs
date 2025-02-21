@@ -1,3 +1,4 @@
+using System.Linq.Expressions;
 using Data.Contexts;
 using Data.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -13,5 +14,13 @@ public class ProjectOwnerRepository(DataContext context) : BaseRepository<Projec
             .ToListAsync();
         
         return ownersWithProject;
+    }
+    
+    public override async Task<ProjectOwnerEntity> GetAsync(Expression<Func<ProjectOwnerEntity, bool>> expression)
+    {
+        var entity = await context.ProjectOwner.Include(c => c.Project).FirstOrDefaultAsync(expression);
+        if (entity == null)
+            throw new KeyNotFoundException("Entity not found.");
+        return entity!;
     }
 }
