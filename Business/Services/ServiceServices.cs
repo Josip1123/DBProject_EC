@@ -9,13 +9,17 @@ public class ServiceServices(ServicesRepository servicesRepository) : IServiceSe
 {
     public async Task CreateServiceAsync(ServicesEntity service)
     {
+        await servicesRepository.BeginTransactionAsync();
+        
         try
         {
             await servicesRepository.AddAsync(service);
+            await servicesRepository.CommitTransactionAsync();
         }
         catch (Exception e)
         {
             Debug.WriteLine(e);
+            await servicesRepository.RollbackAsync();
             throw;
         }
     }
@@ -57,6 +61,7 @@ public class ServiceServices(ServicesRepository servicesRepository) : IServiceSe
 
     public async Task DeleteAsync(string id)
     {
+        await servicesRepository.BeginTransactionAsync();
         try
         {
             var entityToDelete = await GetByIdAsync(id);
@@ -65,10 +70,12 @@ public class ServiceServices(ServicesRepository servicesRepository) : IServiceSe
                 throw new Exception("Service not found");
             }
             await servicesRepository.DeleteAsync(entityToDelete);
+            await servicesRepository.CommitTransactionAsync();
         }
         catch (Exception e)
         {
             Debug.WriteLine(e);
+            await servicesRepository.RollbackAsync();
             throw;
         }
         
@@ -76,6 +83,7 @@ public class ServiceServices(ServicesRepository servicesRepository) : IServiceSe
 
     public async Task UpdateAsync(ServiceDto service, string id)
     {
+        await servicesRepository.BeginTransactionAsync();
         try
         {
             var entityToUpdate = await GetByIdAsync(id);
@@ -87,10 +95,12 @@ public class ServiceServices(ServicesRepository servicesRepository) : IServiceSe
             entityToUpdate.Description = service.Description;
             entityToUpdate.Price = service.Price;
             await servicesRepository.UpdateAsync(entityToUpdate);
+            await servicesRepository.CommitTransactionAsync();
         }
         catch (Exception e)
         {
             Console.WriteLine(e);
+            await servicesRepository.RollbackAsync();
             throw;
         }
         

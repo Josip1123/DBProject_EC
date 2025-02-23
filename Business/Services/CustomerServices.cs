@@ -9,13 +9,17 @@ public class CustomerServices(CustomersRepository customersRepository) : ICustom
 {
     public async Task CreateCustomerAsync(CustomersEntity customer)
     {
+        await customersRepository.BeginTransactionAsync();
+        
         try
         {
             await customersRepository.AddAsync(customer);
+            await customersRepository.CommitTransactionAsync();
         }
         catch (Exception e)
         {
             Debug.WriteLine(e);
+            await customersRepository.RollbackAsync();
             throw;
         }
     }
@@ -43,6 +47,7 @@ public class CustomerServices(CustomersRepository customersRepository) : ICustom
             if (customer == null)
             {
                 throw new Exception("Customer not found");
+                
             }
             return customer;
         }
@@ -57,6 +62,7 @@ public class CustomerServices(CustomersRepository customersRepository) : ICustom
 
     public async Task DeleteAsync(string id)
     {
+        await customersRepository.BeginTransactionAsync();
         try
         {
             var entityToDelete = await GetByIdAsync(id);
@@ -65,10 +71,12 @@ public class CustomerServices(CustomersRepository customersRepository) : ICustom
                 throw new Exception("Customer not found");
             }
             await customersRepository.DeleteAsync(entityToDelete);
+            await customersRepository.CommitTransactionAsync();
         }
         catch (Exception e)
         {
             Debug.WriteLine(e);
+            await customersRepository.RollbackAsync();
             throw;
         }
         
@@ -76,6 +84,7 @@ public class CustomerServices(CustomersRepository customersRepository) : ICustom
 
     public async Task UpdateAsync(CustomerDto customer, string id)
     {
+        await customersRepository.BeginTransactionAsync();
         try
         {
             var entityToUpdate = await GetByIdAsync(id);
@@ -86,10 +95,12 @@ public class CustomerServices(CustomersRepository customersRepository) : ICustom
             entityToUpdate.Name = customer.Name;
             entityToUpdate.Email = customer.Email;
             await customersRepository.UpdateAsync(entityToUpdate);
+            await customersRepository.CommitTransactionAsync();
         }
         catch (Exception e)
         {
             Console.WriteLine(e);
+            await customersRepository.RollbackAsync();
             throw;
         }
         

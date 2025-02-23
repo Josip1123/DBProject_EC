@@ -1,6 +1,5 @@
 using System.Diagnostics;
 using Business.Dtos;
-using Business.Factories;
 using Data.Entities;
 using Data.Repositories;
 
@@ -11,13 +10,17 @@ public class ProjectServices(ProjectsRepository projectsRepository) : IProjectSe
 {
     public async Task CreateProjectAsync(ProjectEntity project)
     {
+        await projectsRepository.BeginTransactionAsync();
+        
         try
         {
             await projectsRepository.AddAsync(project);
+            await projectsRepository.CommitTransactionAsync();
         }
         catch (Exception e)
         {
             Debug.WriteLine(e);
+            await projectsRepository.RollbackAsync();
             throw;
         }
     }
@@ -59,6 +62,8 @@ public class ProjectServices(ProjectsRepository projectsRepository) : IProjectSe
 
     public async Task DeleteAsync(string id)
     {
+        await projectsRepository.BeginTransactionAsync();
+        
         try
         {
             var entityToDelete = await GetByIdAsync(id);
@@ -66,11 +71,16 @@ public class ProjectServices(ProjectsRepository projectsRepository) : IProjectSe
             {
                 throw new Exception("Project not found");
             }
+
+            
             await projectsRepository.DeleteAsync(entityToDelete);
+            
+            await projectsRepository.CommitTransactionAsync();
         }
         catch (Exception e)
         {
             Debug.WriteLine(e);
+            await projectsRepository.RollbackAsync();
             throw;
         }
         
@@ -78,6 +88,7 @@ public class ProjectServices(ProjectsRepository projectsRepository) : IProjectSe
 
     public async Task UpdateAsync(ProjectDto project, string id)
     {
+        await projectsRepository.BeginTransactionAsync();
         try
         {
                 var entityToUpdate = await GetByIdAsync(id);
@@ -89,10 +100,12 @@ public class ProjectServices(ProjectsRepository projectsRepository) : IProjectSe
                 entityToUpdate.DateDue = project.DateDue;
                 entityToUpdate.IsCompleted = project.IsCompleted;
                 await projectsRepository.UpdateAsync(entityToUpdate);
+                await projectsRepository.CommitTransactionAsync();
         }
         catch (Exception e)
         {
             Console.WriteLine(e);
+            await projectsRepository.RollbackAsync();
             throw;
         }
         

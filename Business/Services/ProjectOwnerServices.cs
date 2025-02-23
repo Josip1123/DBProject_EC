@@ -9,13 +9,16 @@ public class ProjectOwnerServices(ProjectOwnerRepository ownerRepository) : IOwn
 {
     public async Task CreateProjectOwnerAsync(ProjectOwnerEntity owner)
     {
+        await ownerRepository.BeginTransactionAsync();
         try
         {
             await ownerRepository.AddAsync(owner);
+            await ownerRepository.CommitTransactionAsync();
         }
         catch (Exception e)
         {
             Debug.WriteLine(e);
+            await ownerRepository.RollbackAsync();
             throw;
         }
     }
@@ -57,6 +60,7 @@ public class ProjectOwnerServices(ProjectOwnerRepository ownerRepository) : IOwn
 
     public async Task DeleteAsync(string id)
     {
+        await ownerRepository.BeginTransactionAsync();
         try
         {
             var entityToDelete = await GetByIdAsync(id);
@@ -65,10 +69,12 @@ public class ProjectOwnerServices(ProjectOwnerRepository ownerRepository) : IOwn
                 throw new Exception("Project Owner not found");
             }
             await ownerRepository.DeleteAsync(entityToDelete);
+            await ownerRepository.CommitTransactionAsync();
         }
         catch (Exception e)
         {
             Debug.WriteLine(e);
+            await ownerRepository.RollbackAsync();
             throw;
         }
         
@@ -76,6 +82,7 @@ public class ProjectOwnerServices(ProjectOwnerRepository ownerRepository) : IOwn
 
     public async Task UpdateAsync(ProjectOwnerDto owner, string id)
     {
+        await ownerRepository.BeginTransactionAsync();
         try
         {
             var entityToUpdate = await GetByIdAsync(id);
@@ -86,10 +93,12 @@ public class ProjectOwnerServices(ProjectOwnerRepository ownerRepository) : IOwn
             entityToUpdate.Name = owner.Name;
             entityToUpdate.Email = owner.Email;
             await ownerRepository.UpdateAsync(entityToUpdate);
+            await ownerRepository.CommitTransactionAsync();
         }
         catch (Exception e)
         {
             Console.WriteLine(e);
+            await ownerRepository.RollbackAsync();
             throw;
         }
         
