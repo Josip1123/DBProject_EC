@@ -1,4 +1,4 @@
-/*using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 namespace Data.Contexts;
 
@@ -11,6 +11,4 @@ public class DataContextFactory : IDesignTimeDbContextFactory<DataContext>
 
         return new DataContext(optionsBuilder.Options);
     }
-}*/
-
-//behövs inte i nuläget
+}
