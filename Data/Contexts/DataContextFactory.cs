@@ -7,7 +7,7 @@ public class DataContextFactory : IDesignTimeDbContextFactory<DataContext>
     public DataContext CreateDbContext(string[] args)
     {
         var optionsBuilder = new DbContextOptionsBuilder<DataContext>();
-        optionsBuilder.UseSqlite("DefaultConnection");
+        optionsBuilder.UseSqlite("Data Source=/Users/josipsmac/Desktop/EC_utbildning/Csharp/DBProject_EC/Data/MyDatabse.db");
 
         return new DataContext(optionsBuilder.Options);
     }

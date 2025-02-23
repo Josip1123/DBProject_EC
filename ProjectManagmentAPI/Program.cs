@@ -1,4 +1,4 @@
-using System.Text.Json.Serialization;
+
 using Business.Services;
 using Data.Contexts;
 using Data.Repositories;
@@ -7,8 +7,7 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
-builder.Services.AddDbContext<DataContext>(options =>
-    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddDbContext<DataContext>();
 builder.Services.AddScoped<ProjectsRepository>();
 builder.Services.AddScoped<ProjectServices>();
 builder.Services.AddScoped<CustomersRepository>();
